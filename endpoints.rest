@@ -1,0 +1,7 @@
+GET http://localhost:3000/shoppinglists
+
+#GET  http://localhost:3000/shoppingList/65c159fd5108c60ab4565e7f
+
+#POST htpp://localhost:3000/shoppinglists # Content-Type: application/json
+
+
