@@ -1,25 +1,34 @@
-require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
-const dayjs = require("dayjs");
-dayjs().format();
+require("dotenv").config();
+// connect mongodb
 const port = process.env.PORT;
 
+//mongooose
 const mongoose = require("mongoose");
 const ShoppingList = require("./models/ShoppingList");
-
 mongoose.connect(process.env.DATABASE_URL);
 const db = mongoose.connection;
 db.once("open", () => console.log("connected to mongoDB"));
 
+//setup app
 const app = express();
 app.use(morgan("dev"));
 app.use(express.json());
 
+//create endpoints
+//Get all lists
+
 app.get("/shppinglists", (req, res) => {
-  const newShoppingList = new ShoppingList(req.body);
-  newShoppingList.save();
-  res.status(202).json(newShoppingList);
+  ShoppingList.find()
+    .then((results) => {
+      if (results) {
+        res.status(200).json(results);
+      } else {
+        res.status(404).json({ message: "not found" });
+      }
+    })
+    .catch((error) => res.status(400).json({ message: "Bad request" }));
 });
 
 app.get("/shoppinglists/:shoppinglistId", (req, res) => {
