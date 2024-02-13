@@ -2,9 +2,10 @@ GET http://localhost:3000/shoppinglists
 // get all lists //
 ###
 
-POST http://localhost:3000/shoppinglists Content-Type: application.json
+POST http://localhost:3000/shoppinglists Content-Type: application/json
+
 {
-  "title": "list", "createdAt": "2024-02-08", "2024-01-04T23:03:10:635z", "items": []
+"title": "list", "createdAt": "2024-02-06", "updatedAt": "2024-01-04T23:03:10.635Z", "items": []
 }
 
 ###
