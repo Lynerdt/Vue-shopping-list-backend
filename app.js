@@ -1,14 +1,10 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const morgan = require("morgan");
 require("dotenv").config();
 const dayjs = require("dayjs");
 
-// connect mongodb
-const port = process.env.PORT;
-
 //mongooose
-const mongoose = require("mongoose");
-const ShoppingList = require("./models/ShoppingList");
 mongoose.connect(process.env.DATABASE_URL);
 const db = mongoose.connection;
 db.once("open", () => console.log("connected to mongoDB"));
@@ -16,8 +12,11 @@ db.once("open", () => console.log("connected to mongoDB"));
 //setup app
 const app = express();
 app.use(morgan("dev"));
+// connect mongodb
 app.use(express.json());
+const port = process.env.PORT || 3000;
 
+const ShoppingList = require("./models/ShoppingList");
 //Get all lists
 app.get("/shoppinglists", (req, res) => {
   ShoppingList.find()
@@ -112,4 +111,4 @@ app.get("*", function (req, res) {
   res.status(404).json({ message: "try again" });
 });
 
-app.listen(port, () => console.log("App is running on port ${port}"));
+app.listen(port, () => console.log(`App is running on port ${port}`));
