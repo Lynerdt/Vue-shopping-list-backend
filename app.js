@@ -1,22 +1,21 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const morgan = require("morgan");
 require("dotenv").config();
+const express = require("express");
+const morgan = require("morgan");
+const cors = require("cors");
 const dayjs = require("dayjs");
 
-//mongooose
+const port = process.env.PORT || 3000;
+//connnect mongodb
+const mongoose = require("mongoose");
+const ShoppingList = require("./models/ShoppingList");
 mongoose.connect(process.env.DATABASE_URL);
 const db = mongoose.connection;
 db.once("open", () => console.log("connected to mongoDB"));
-
-//setup app
 const app = express();
 app.use(morgan("dev"));
-// connect mongodb
 app.use(express.json());
-const port = process.env.PORT || 3000;
+app.use(cors());
 
-const ShoppingList = require("./models/ShoppingList");
 //Get all lists
 app.get("/shoppinglists", (req, res) => {
   ShoppingList.find()

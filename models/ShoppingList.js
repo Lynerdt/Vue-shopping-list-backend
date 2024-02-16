@@ -6,14 +6,9 @@ const shoppingListSchema = new mongoose.Schema(
     title: { type: String, max: 50, required: true },
     items: [
       {
-        type: new mongoose.Schema(
-          {
-            name: String,
-            quantity: Number,
-            purchased: Boolean,
-          },
-          { timestamps: true }
-        ),
+        name: String,
+        quantity: Number,
+        purchased: Boolean,
       },
     ],
   },

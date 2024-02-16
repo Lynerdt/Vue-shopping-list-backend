@@ -1,19 +1,48 @@
+//get all lists
+
 GET http://localhost:3000/shoppinglists
-// get all lists //
+
 ###
 
-POST http://localhost:3000/shoppinglists 
+POST http://localhost:3000/shoppinglists
 Content-Type: application/json
 
-{ 
-"title":"Target"
+{
+"title":"list 2"
 }
 
 ###
+// get specific list by ID 
 
-GET  http://localhost:3000/shoppingList/65c159fd5108c60ab4565e7f
-// get specific list //
+GET  http://localhost:3000/shoppinglists/65cea780df0538762080c82d
+
+###
+// update a list title by ID, not working
+
+PATCH http://localhost:3000/shoppinglists/65ceb3a7ae02560f2cc79905
+Content-Type: application/json
+
+{
+"title":"list 3"
+}
+
+
+
+
+###
+//delete a shopping list by ID
+
+DELETE http://localhost:3000/shoppinglists/65cea76ddf0538762080c82b
+
 ###
 
-POST htpp://localhost:3000/shoppinglists # Content-Type: application/json
-//create a list //
+//add item to shopping list by ID
+
+POST http://localhost:3000/shoppinglists/65cea76ddf0538762080c82b/items
+Content-Type: application/json
+
+{
+  "name":"Bananas","quantity":2, "purchased":"true"
+}
+
+###
